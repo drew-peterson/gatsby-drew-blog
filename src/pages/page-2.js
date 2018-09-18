@@ -3,8 +3,8 @@ import { Link } from 'gatsby'
 
 import Layout from '../components/layout'
 
-const SecondPage = () => (
-  <Layout>
+const SecondPage = ({ location }) => (
+  <Layout location={location}>
     <h1>Hi from the second page</h1>
     <h2>drew test</h2>
     <p>Welcome to page 2</p>

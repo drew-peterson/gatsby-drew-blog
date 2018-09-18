@@ -7,11 +7,11 @@ class PostPage extends Component {
       data: {
         post: { frontmatter, html },
       },
+      location,
     } = this.props
     const { title, date } = frontmatter
-
     return (
-      <Layout>
+      <Layout location={location}>
         <span>{date}</span>
         <h1>{title}</h1>
         <div dangerouslySetInnerHTML={{ __html: html }} />

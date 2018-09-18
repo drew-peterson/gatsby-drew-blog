@@ -3,12 +3,12 @@ import Layout from '../components/layout'
 import { graphql } from 'gatsby'
 import PostListing from '../components/Posts/PostListing'
 
-const IndexPage = ({ data }) => {
+const IndexPage = ({ data, location }) => {
   const {
     md: { edges },
   } = data
   return (
-    <Layout>
+    <Layout location={location}>
       <h2>Posts</h2>
       {edges.map(({ node }) => (
         <PostListing key={node.id} post={node} />

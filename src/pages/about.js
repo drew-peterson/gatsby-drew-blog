@@ -4,7 +4,7 @@ import Layout from '../components/layout'
 export default class About extends Component {
   render() {
     return (
-      <Layout>
+      <Layout location={this.props.location}>
         <h1>About us</h1>
         <p>
           pug Truffaut put a bird on it hashtag squid sriracha fixie meh
