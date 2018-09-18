@@ -9,12 +9,20 @@ class PostPage extends Component {
       },
       location,
     } = this.props
-    const { title, date } = frontmatter
+    const { title, date, image } = frontmatter
     return (
       <Layout location={location}>
         <span>{date}</span>
         <h1>{title}</h1>
         <div dangerouslySetInnerHTML={{ __html: html }} />
+
+        {image && (
+          <div>
+            <h3>from the image collection</h3>
+            {/* assets need to have no spaces in fiel */}
+            <img src={image} alt="" />
+          </div>
+        )}
       </Layout>
     )
   }
@@ -29,6 +37,7 @@ export const query = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD YYYY")
+        image
       }
     }
   }

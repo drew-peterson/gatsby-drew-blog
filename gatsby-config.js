@@ -35,6 +35,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`, // nost sure if needed seems to work without
+      options: {
+        name: `img`,
+        path: `${__dirname}/static/assets`,
+      },
+    },
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         excerpt_separator: `<!-- end -->`, // not working.... but basically you can customize what is excerpt by adding <!-- end --> could be any string
