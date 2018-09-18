@@ -6,5 +6,3 @@ date: 2018-09-18T23:09:08.782Z
 
 * bullet point here
 * and here
-
-![null](/static/assets/dsc_0625.jpg)
