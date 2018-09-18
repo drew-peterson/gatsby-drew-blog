@@ -7,12 +7,9 @@ const IndexPage = ({ data }) => {
   const {
     md: { edges },
   } = data
-  const { title, desc } = data.site.siteMetadata
   return (
     <Layout>
-      <p>{title}</p>
-      <p>{desc}</p>
-
+      <h2>Posts</h2>
       {edges.map(({ node }) => (
         <PostListing key={node.id} post={node} />
       ))}
@@ -34,11 +31,16 @@ export const query = graphql`
       edges {
         node {
           id
+          fields {
+            slug
+          }
           frontmatter {
             title
             date(formatString: "MMMM DD YYYY")
           }
           html
+          excerpt
+          # excerpt(pruneLength: 280)
         }
       }
     }

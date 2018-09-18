@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Default Starter',
+    title: 'Drew Gatsby Testing',
     desc: 'a new blog', // restart server to get changes in graphql
   },
   plugins: [
@@ -33,7 +33,12 @@ module.exports = {
         path: `${__dirname}/src/`,
       },
     },
-    'gatsby-transformer-remark',
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        excerpt_separator: `<!-- end -->`, // not working.... but basically you can customize what is excerpt by adding <!-- end --> could be any string
+      },
+    },
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`, // grab images
   ],
