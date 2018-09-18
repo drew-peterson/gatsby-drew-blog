@@ -27,7 +27,8 @@ export const query = graphql`
         desc
       }
     }
-    md: allMarkdownRemark {
+    # markdown remark sorting not graphql
+    md: allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
           id

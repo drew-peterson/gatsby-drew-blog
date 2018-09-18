@@ -37,7 +37,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 //       result.data.allMarkdownRemark.edges.forEach(({ node }) => {
 //         createPage({
 //           path: node.fields.slug,
-//           component: path.resolve('./src/pages/about.js'),
+//           component: path.resolve('./src/components/Posts/PostPage.js'),
 //           context: {
 //             slug: node.fields.slug,
 //           },

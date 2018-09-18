@@ -3,6 +3,7 @@ module.exports = {
     title: 'Drew Gatsby Testing',
     desc: 'a new blog', // restart server to get changes in graphql
   },
+  pathPrefix: '/gatsby',
   plugins: [
     'gatsby-plugin-react-helmet',
     {
