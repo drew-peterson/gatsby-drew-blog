@@ -3,6 +3,7 @@ backend:
   repo: weeznog/gatsby-drew-blog
   branch: master
 media_folder: static/assets
+public_folder: /assets #
 # could use any type here look them up
 collections:
   - name: post
