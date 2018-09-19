@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
-import logo from '../images/logo.jpg'
+// import logo from '../images/logo.jpg'
 import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import Transition from 'react-transition-group/Transition'
@@ -32,50 +32,61 @@ class Header extends Component {
   }
 
   render() {
-    const { siteTitle, location } = this.props
+    console.log('this.props', this.props)
     return (
-      <Transition in={this.state.in} timeout={0}>
-        {state => {
+      <StaticQuery
+        query={HEADER}
+        render={({ header: { title, hero, profilePicture } }) => {
           return (
-            <HeaderWrapper
-              isHome={location.pathname === '/'}
-              className={state}
-              // ref={wrapper => (this.wrapper = ReactDOM.findDOMNode(wrapper))} // get dom element
-            >
-              <HeaderContainer>
-                <h1 style={{ margin: 0 }}>
-                  <img src={logo} alt="my face" />
-                  <Link
-                    to="/"
-                    style={{ color: 'white', textDecoration: 'none' }}
-                  >
-                    {siteTitle}
-                  </Link>
-                </h1>
-                <MainNav>
-                  <ul>
-                    <li>
-                      <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                      <Link to="/about">About</Link>
-                    </li>
-                  </ul>
-                </MainNav>
-              </HeaderContainer>
-              <StaticQuery
-                query={IMAGE}
-                render={({ background: { fluid } }) => (
-                  <Img style={styles.image} fluid={fluid} />
-                )}
-              />
-            </HeaderWrapper>
+            <RenderHeader
+              title={title}
+              hero={hero}
+              profilePicture={profilePicture}
+              state={this.state}
+              location={this.props.location}
+            />
           )
         }}
-      </Transition>
+      />
     )
   }
 }
+
+const RenderHeader = ({ title, location, profilePicture, hero, state }) => (
+  <Transition in={state.in} timeout={0}>
+    {state => (
+      <HeaderWrapper
+        isHome={location.pathname === '/'}
+        className={state}
+        // ref={wrapper => (this.wrapper = ReactDOM.findDOMNode(wrapper))} // get dom element
+      >
+        <HeaderContainer>
+          <h1 style={{ margin: 0 }}>
+            <Img
+              className="profilePicture"
+              fluid={profilePicture.fluid}
+              alt="profile picture"
+            />
+            <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
+              {title}
+            </Link>
+          </h1>
+          <MainNav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+            </ul>
+          </MainNav>
+        </HeaderContainer>
+        <Img style={styles.image} fluid={hero.fluid} />
+      </HeaderWrapper>
+    )}
+  </Transition>
+)
 
 const styles = {
   image: {
@@ -105,25 +116,9 @@ const HeaderWrapper = styled.div`
   h1 {
     display: flex;
     align-items: center;
-    img {
-      height: 50px;
-      margin: 0;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
   }
 
   nav {
-  }
-`
-
-const IMAGE = graphql`
-  query HeaderImage {
-    background: imageSharp(original: { src: { regex: "/logo/" } }) {
-      fluid(maxWidth: 1240) {
-        ...GatsbyImageSharpFluid
-      }
-    }
   }
 `
 
@@ -136,6 +131,14 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .profilePicture {
+    height: 70px;
+    width: 70px;
+    margin: 0;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
 `
 
 const MainNav = styled.nav`
@@ -158,13 +161,22 @@ const MainNav = styled.nav`
   }
 `
 
-// doesnt work with Img but in thery it could work
-// const Billboard = styled(Img)`
-//   position: absolute;
-//   left: 0;
-//   top: 0;
-//   width: 100%;
-//   height: 100%;
-// `
+const HEADER = graphql`
+  query HeaderQuery {
+    header: contentfulHeader(contentful_id: { eq: "2cKN9qRqWwq2CQKaEass2i" }) {
+      title
+      hero {
+        fluid(maxWidth: 1240) {
+          ...GatsbyContentfulFluid
+        }
+      }
+      profilePicture {
+        fluid(maxWidth: 100) {
+          ...GatsbyContentfulFluid
+        }
+      }
+    }
+  }
+`
 
 export default Header

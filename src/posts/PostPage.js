@@ -34,6 +34,11 @@ export const query = graphql`
           html
         }
       }
+      # image {
+      #   fluid(maxWidth: 500) {
+      #     ...GatsbyContentfulFluid
+      #   }
+      # }
     }
   }
 `

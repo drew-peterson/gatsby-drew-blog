@@ -38,13 +38,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-filesystem`, // nost sure if needed seems to work without
-      options: {
-        name: `img`,
-        path: `${__dirname}/static/assets`,
-      },
-    },
-    {
       resolve: 'gatsby-source-contentful',
       options: {
         spaceId: 'gu6gno1iejvi',
