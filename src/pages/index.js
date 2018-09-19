@@ -27,21 +27,18 @@ export const query = graphql`
         desc
       }
     }
-    # markdown remark sorting not graphql
-    md: allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    md: allContentfulBlogPost {
       edges {
         node {
           id
-          fields {
-            slug
+          title
+          slug
+          createdAt(formatString: "MMMM DD YYYY")
+          body {
+            childMarkdownRemark {
+              excerpt
+            }
           }
-          frontmatter {
-            title
-            date(formatString: "MMMM DD YYYY")
-          }
-          html
-          excerpt
-          # excerpt(pruneLength: 280)
         }
       }
     }

@@ -6,6 +6,11 @@ module.exports = {
   pathPrefix: '/gatsby-drew-blog',
   plugins: [
     'gatsby-plugin-react-helmet',
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`, // grab images
+    'gatsby-plugin-offline',
+    'gatsby-plugin-styled-components', // so it renders the component correctly
+    'gatsby-transformer-remark',
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -18,8 +23,6 @@ module.exports = {
         icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
       },
     },
-    'gatsby-plugin-offline',
-    'gatsby-plugin-styled-components', // so it renders the component correctly
     {
       resolve: `gatsby-source-filesystem`, // query filesystem such as images
       options: {
@@ -42,13 +45,12 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: 'gatsby-source-contentful',
       options: {
-        excerpt_separator: `<!-- end -->`, // not working.... but basically you can customize what is excerpt by adding <!-- end --> could be any string
+        spaceId: 'gu6gno1iejvi',
+        accessToken:
+          '174449c6bde1af67515606bd96534542032af4c0d852a3261266b6944b698e26',
       },
     },
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`, // grab images
-    'gatsby-plugin-netlify-cms',
   ],
 }

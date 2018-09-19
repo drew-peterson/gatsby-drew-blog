@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import { graphql } from 'gatsby'
-import Layout from '../../components/layout'
+import Layout from '../components/layout'
 class PostPage extends Component {
   render() {
     const {
       data: {
-        post: { frontmatter, html },
+        post: { createdAt, title, body, image },
       },
       location,
     } = this.props
-    const { title, date, image } = frontmatter
+
+    const { html } = body.childMarkdownRemark
     return (
       <Layout location={location}>
-        <span>{date}</span>
+        <span>{createdAt}</span>
         <h1>{title}</h1>
         <div dangerouslySetInnerHTML={{ __html: html }} />
 
@@ -31,13 +32,15 @@ class PostPage extends Component {
 // StaticQuery does not accept variables
 export const query = graphql`
   query BlogPostQuery($slug: String!) {
-    post: markdownRemark(fields: { slug: { eq: $slug } }) {
-      excerpt
-      html
-      frontmatter {
-        title
-        date(formatString: "MMMM DD YYYY")
-        image
+    post: contentfulBlogPost(slug: { eq: $slug }) {
+      id
+      slug
+      title
+      createdAt(formatString: "MMMM DD, YYYY")
+      body {
+        childMarkdownRemark {
+          html
+        }
       }
     }
   }
