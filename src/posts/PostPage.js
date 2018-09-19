@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { graphql } from 'gatsby'
+import Img from 'gatsby-image'
 import Layout from '../components/layout'
 class PostPage extends Component {
   render() {
     const {
       data: {
-        post: { createdAt, title, body },
+        post: { createdAt, title, body, image },
       },
       location,
     } = this.props
@@ -15,6 +16,7 @@ class PostPage extends Component {
       <Layout location={location}>
         <span>{createdAt}</span>
         <h1>{title}</h1>
+        <Img fluid={image.fluid} />
         <div dangerouslySetInnerHTML={{ __html: html }} />
       </Layout>
     )
@@ -34,11 +36,11 @@ export const query = graphql`
           html
         }
       }
-      # image {
-      #   fluid(maxWidth: 500) {
-      #     ...GatsbyContentfulFluid
-      #   }
-      # }
+      image {
+        fluid(maxWidth: 500) {
+          ...GatsbyContentfulFluid
+        }
+      }
     }
   }
 `
