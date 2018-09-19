@@ -5,7 +5,7 @@ class PostPage extends Component {
   render() {
     const {
       data: {
-        post: { createdAt, title, body, image },
+        post: { createdAt, title, body },
       },
       location,
     } = this.props
@@ -16,14 +16,6 @@ class PostPage extends Component {
         <span>{createdAt}</span>
         <h1>{title}</h1>
         <div dangerouslySetInnerHTML={{ __html: html }} />
-
-        {image && (
-          <div>
-            <h3>from the image collection</h3>
-            {/* assets need to have no spaces in fiel */}
-            <img src={image} alt="" />
-          </div>
-        )}
       </Layout>
     )
   }
