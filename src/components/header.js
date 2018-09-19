@@ -92,7 +92,7 @@ const HeaderWrapper = styled.div`
   margin-bottom: 1.45rem;
   overflow: hidden;
   position: relative;
-  background: green;
+  background: blue;
   transition: height 300ms cubic-bezier(0.86, 0, 0.07, 1);
 
   &.entering {

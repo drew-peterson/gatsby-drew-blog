@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Drew Gatsby Testing',
+    title: 'Drew Gatsby Contentful',
     desc: 'a new blog', // restart server to get changes in graphql
   },
   pathPrefix: '/gatsby-drew-blog',
