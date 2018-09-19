@@ -151,7 +151,7 @@ const MainNav = styled.nav`
         color: #fff;
 
         &:hover {
-          border-bottom: 3px solid green;
+          border-bottom: 3px solid blue;
         }
       }
     }
