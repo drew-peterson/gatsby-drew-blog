@@ -6,6 +6,7 @@ export default class Lambda extends Component {
     url: '/.netlify/functions/hello',
   }
   click = async () => {
+    console.log('click')
     const res = await axios.get(this.state.url)
     console.log('res', res)
   }
