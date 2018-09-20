@@ -32,7 +32,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log('this.props', this.props)
     return (
       <StaticQuery
         query={HEADER}
@@ -78,6 +77,9 @@ const RenderHeader = ({ title, location, profilePicture, hero, state }) => (
               </li>
               <li>
                 <Link to="/about">About</Link>
+              </li>
+              <li>
+                <Link to="/lambda">Lambda</Link>
               </li>
             </ul>
           </MainNav>
