@@ -32,12 +32,14 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "dev": "gatsby develop",
+    "server": "netlify-lambda serve ./lambda",
     "format": "prettier --write '**/*.js'",
     "deploy": "gatsby build --prefix-path && gh-pages -d public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "gh-pages": "^2.0.0",
+    "netlify-lambda": "^0.4.0",
     "prettier": "^1.14.2"
   },
   "repository": {
