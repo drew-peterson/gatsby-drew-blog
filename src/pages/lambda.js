@@ -4,11 +4,10 @@ import axios from 'axios'
 export default class Lambda extends Component {
   state = {
     url: '/.netlify/functions/hello',
+    show: false,
   }
   click = async () => {
-    console.log('click')
-    const res = await axios.get(this.state.url)
-    console.log('res', res)
+    await axios.get(this.state.url)
   }
 
   render() {
@@ -22,6 +21,12 @@ export default class Lambda extends Component {
           onChange={e => this.setState({ url: e.target.value })}
         />
         <button onClick={this.click}>lambda</button>
+        <button onClick={() => this.setState({ show: !this.state.show })}>
+          toggle
+        </button>
+
+        <p>whats the message?</p>
+        {this.state.show && <p>Message here that is secret after click</p>}
       </Layout>
     )
   }
