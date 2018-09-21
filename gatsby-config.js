@@ -1,3 +1,9 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
+const { GRAPH_CMS, CONTENTFUL_ID, CONTENTFUL_TOKEN, GITHUB_TOKEN } = process.env
+
 module.exports = {
   siteMetadata: {
     title: 'Drew Gatsby Contentful',
@@ -40,9 +46,37 @@ module.exports = {
     {
       resolve: 'gatsby-source-contentful',
       options: {
-        spaceId: 'gu6gno1iejvi',
-        accessToken:
-          '174449c6bde1af67515606bd96534542032af4c0d852a3261266b6944b698e26',
+        spaceId: CONTENTFUL_ID,
+        accessToken: CONTENTFUL_TOKEN,
+      },
+    },
+    {
+      resolve: 'gatsby-source-graphql',
+      options: {
+        // This type will contain remote schema Query type
+        typeName: 'DREW',
+        // This is field under which it's accessible
+        fieldName: 'drew',
+        // Url to query from
+        url: GRAPH_CMS,
+        // refetch interval in seconds
+        // refetchInterval: 60,
+      },
+    },
+    {
+      resolve: 'gatsby-source-graphql',
+      options: {
+        typeName: 'GitHub',
+        fieldName: 'github',
+        // Url to query from
+        url: 'https://api.github.com/graphql',
+        // HTTP headers
+        headers: {
+          Authorization: `bearer ${GITHUB_TOKEN}`,
+        },
+        // Additional options to pass to node-fetch
+        fetchOptions: {},
+        // refetchInterval: 60,
       },
     },
   ],
