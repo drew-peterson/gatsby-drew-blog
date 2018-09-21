@@ -16,6 +16,7 @@ class Header extends Component {
       { to: '/', title: 'Home' },
       { to: '/about', title: 'About' },
       { to: '/lambda', title: 'Lambda' },
+      { to: '/fetch', title: 'Fetch' },
     ]
   }
 
