@@ -4,10 +4,21 @@ import styled from 'styled-components'
 // import logo from '../images/logo.jpg'
 import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
-import Transition from 'react-transition-group/Transition'
+
+import { Spring, Trail } from 'react-spring'
 
 class Header extends Component {
   state = { in: false }
+
+  constructor(props) {
+    super(props)
+    this.nav = [
+      { to: '/', title: 'Home' },
+      { to: '/about', title: 'About' },
+      { to: '/lambda', title: 'Lambda' },
+    ]
+  }
+
   componentDidMount() {
     this.setState({ in: true })
     // const { location } = this.props
@@ -38,6 +49,7 @@ class Header extends Component {
         render={({ header: { title, hero, profilePicture } }) => {
           return (
             <RenderHeader
+              nav={this.nav}
               title={title}
               hero={hero}
               profilePicture={profilePicture}
@@ -51,43 +63,72 @@ class Header extends Component {
   }
 }
 
-const RenderHeader = ({ title, location, profilePicture, hero, state }) => (
-  <Transition in={state.in} timeout={0}>
-    {state => (
-      <HeaderWrapper
-        isHome={location.pathname === '/'}
-        className={state}
-        // ref={wrapper => (this.wrapper = ReactDOM.findDOMNode(wrapper))} // get dom element
-      >
-        <HeaderContainer>
-          <h1 style={{ margin: 0 }}>
+const RenderHeader = ({
+  title,
+  location,
+  profilePicture,
+  hero,
+  state,
+  nav,
+}) => (
+  <HeaderWrapper
+    isHome={location.pathname === '/'}
+    className={state}
+    // ref={wrapper => (this.wrapper = ReactDOM.findDOMNode(wrapper))} // get dom element
+  >
+    <HeaderContainer>
+      <h1 style={{ margin: 0 }}>
+        <Spring
+          delay={1000}
+          from={{ transform: 'translateX(-20px)', opacity: 0 }}
+          to={{ opacity: 1, transform: 'translateX(0)' }}
+        >
+          {styles => (
             <Img
+              style={styles}
               className="profilePicture"
               fluid={profilePicture.fluid}
               alt="profile picture"
             />
-            <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
-              {title}
-            </Link>
-          </h1>
-          <MainNav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
+          )}
+        </Spring>
+
+        <Spring
+          delay={2000}
+          from={{ transform: 'translateY(-20px)', opacity: 0 }}
+          to={{ opacity: 1, transform: 'translateY(0)' }}
+        >
+          {styles => {
+            return (
+              <Link
+                to="/"
+                style={{ color: 'white', textDecoration: 'none', ...styles }}
+              >
+                {title}
+              </Link>
+            )
+          }}
+        </Spring>
+      </h1>
+      <MainNav>
+        <ul>
+          <Trail
+            keys={nav.map(item => item.to)}
+            delay={3000}
+            from={{ transform: 'translateY(-20px)', opacity: 0 }}
+            to={{ opacity: 1, transform: 'translateY(0)' }}
+          >
+            {nav.map(item => styles => (
+              <li style={styles}>
+                <Link to={item.to}>{item.title}</Link>
               </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/lambda">Lambda</Link>
-              </li>
-            </ul>
-          </MainNav>
-        </HeaderContainer>
-        <Img style={styles.image} fluid={hero.fluid} />
-      </HeaderWrapper>
-    )}
-  </Transition>
+            ))}
+          </Trail>
+        </ul>
+      </MainNav>
+    </HeaderContainer>
+    <Img style={styles.image} fluid={hero.fluid} />
+  </HeaderWrapper>
 )
 
 const styles = {
@@ -106,15 +147,7 @@ const HeaderWrapper = styled.div`
   overflow: hidden;
   position: relative;
   background: blue;
-  transition: height 300ms cubic-bezier(0.86, 0, 0.07, 1);
-
-  &.entering {
-    height: ${({ isHome }) => (isHome ? '20vh' : '70vh')};
-  }
-  &.entered {
-    height: ${({ isHome }) => (isHome ? '70vh' : '20vh')};
-  }
-
+  height: 50vh;
   h1 {
     display: flex;
     align-items: center;

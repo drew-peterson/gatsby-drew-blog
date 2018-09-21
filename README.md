@@ -15,3 +15,13 @@
 
     - images
         - child fluid images ??
+
+
+    - animation
+        - react-spring
+            - paralax , spring, transition, trail ==> easy
+            - cannot control duration
+            - hover transitions need to be applied after with onRest and state
+        - https://github.com/drcmda/react-with-gesture
+        - scroll
+            - https://www.npmjs.com/package/react-waypoint
