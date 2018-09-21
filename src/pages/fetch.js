@@ -6,11 +6,24 @@ export default class Fetch extends Component {
   state = { user: '', loading: true }
 
   async componentDidMount() {
-    const { data } = await axios.get(
-      'https://jsonplaceholder.typicode.com/todos/1'
-    )
-
-    this.setState({ user: data, loading: false })
+    const url =
+      'https://api-uswest.graphcms.com/v1/cjlbn9gc80icg01fz8j4asr8p/master'
+    const {
+      data: { data },
+    } = await axios({
+      url,
+      method: 'post',
+      data: {
+        query: `
+          query {
+            headers {
+              title
+            }
+        }
+      `,
+      },
+    })
+    this.setState({ user: data.headers[0], loading: false })
   }
 
   render() {

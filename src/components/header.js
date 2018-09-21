@@ -44,7 +44,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log('HEADER', this.props)
     return (
       <StaticQuery
         query={HEADER}
