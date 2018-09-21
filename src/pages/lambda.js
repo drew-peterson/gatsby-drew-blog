@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Layout from '../components/layout'
 import axios from 'axios'
 import Waypoint from 'react-waypoint'
-import { Spring } from 'react-spring'
+import { Spring, config } from 'react-spring'
 export default class Lambda extends Component {
   state = {
     url: '/.netlify/functions/hello',
@@ -35,6 +35,7 @@ export default class Lambda extends Component {
         />
         {this.state.showMessage && (
           <Spring
+            config={config.molasses}
             from={
               { opacity: 0, transform: 'translateY(30px)' } // optional
             }

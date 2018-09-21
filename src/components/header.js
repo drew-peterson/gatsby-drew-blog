@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
-import { Spring, Trail } from 'react-spring'
+import { Spring, Trail, config } from 'react-spring'
 
 class Header extends Component {
   state = { in: false }
@@ -94,6 +94,7 @@ const RenderHeader = ({
         </Spring>
 
         <Spring
+          config={config.molasses}
           delay={2000}
           from={{ transform: 'translateY(-20px)', opacity: 0 }}
           to={{ opacity: 1, transform: 'translateY(0)' }}
